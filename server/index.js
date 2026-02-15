@@ -23,7 +23,12 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  // listeners for events (we will add more later)
+  // 1. Listen for audio data from the client
+  socket.on('audio-stream', (data) => {
+    // "data" is a raw binary chunk of your voice
+    console.log(`Received Audio Chunk: ${data.byteLength} bytes`);
+  });
+
   socket.on('disconnect', () => {
     console.log(`User Disconnected: ${socket.id}`);
   });
